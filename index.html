@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<title>Simple History</title>
+<a class="push" href="?push-one">Push One</a>
+<a class="push" href="?push-two">Push Two</a>
+<a class="push" href="?push-three">Push Three</a>
+<a class="replace" href="?replace-one">Replace One</a>
+<a class="replace" href="?replace-two">Replace Two</a>
+<a class="replace" href="?replace-three">Replace Three</a>
+<a href="http://github.com/jzaefferer/simple-history">External Link to GitHub Repo</a>
+<ul id="log"></ul>
+<script src="simple-history.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script>
+(function() {
+	if (!SimpleHistory.supported) {
+		return;
+	}
+	SimpleHistory.start(function(path) {
+		console.log("match", path);
+		document.title = "Simple History - " + path;
+		$("<li>").text("match: " + path).appendTo("#log");
+	});
+	$("a:not([href^=http])").click(function(event) {
+		if (event.metaKey || event.shiftKey || event.ctrlKey) {
+			return;
+		}
+		event.preventDefault();
+		var path = $(event.target).attr("href");
+		if ($(event.target).is(".push")) {
+			SimpleHistory.pushState(event.target.href);
+		} else {
+			SimpleHistory.replaceState(event.target.href);
+		}
+	});
+}())
+</script>
