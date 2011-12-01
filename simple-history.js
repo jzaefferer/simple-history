@@ -1,5 +1,5 @@
 /*!
- * Simple History
+ * Simple History v0.1.0
  *
  * Copyright 2011, Jörn Zaefferer
  * Dual licensed under the MIT or GPL Version 2 licenses.
