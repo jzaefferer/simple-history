@@ -26,7 +26,7 @@
         window.addEventListener("popstate", function() {
           SimpleHistory.notify();
         }, false);
-      }, 1);
+      }, 100);
       this.notify();
     }
   };
