@@ -1,5 +1,5 @@
 /*!
- * Simple History v0.1.0
+ * Simple History v0.2.0
  *
  * Copyright 2011, Jörn Zaefferer
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -14,7 +14,6 @@
     },
     replaceState: function(fragment) {
       history.replaceState({}, null, fragment);
-      this.notify();
     },
     notify: function() {
       this.matcher(location.pathname + location.search);
