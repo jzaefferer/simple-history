@@ -14,13 +14,15 @@ Before you intialize any relevant event handlers, check if HTML5 history is supp
     	// event handlers
     }
 
-When support is available, use `SimpleHistory.start` to notified whenever state changes:
+When support is available, use `SimpleHistory.start` to be notified whenever state changes:
 
     SimpleHistory.start(function(fragment) {
       // pass to router
     });
 
-That callback is called once immediately, then whenever a state change occurs (push or pop).
+That callback is called whenever a state change occurs (push or pop, not on replace). Its not called
+on page load, assuming the inital rendering is done on the server. If not, you have to implement it
+elsewhere.
 
 To trigger a state change manually, use the `pushState` and `replaceState` methods:
 
@@ -38,6 +40,6 @@ file a ticket. Of course, patches (via Pull Requests) are welcome.
 
 ## License
 
-Copyright 2011, Jörn Zaefferer
+Copyright 2012, Jörn Zaefferer
 
 Dual licensed under the MIT or GPL Version 2 licenses.
