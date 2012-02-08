@@ -1,5 +1,5 @@
 /*!
- * Simple History v0.4.0
+ * Simple History v0.5.0
  *
  * Copyright 2011, Jörn Zaefferer
  * Dual licensed under the MIT or GPL Version 2 licenses.
@@ -10,26 +10,28 @@
 
   window.SimpleHistory = {
     supported: !!(window.history && window.history.pushState),
-    pushState: function(fragment) {
-      history.pushState({}, null, fragment);
-      this.notify();
+    pushState: function(fragment, state) {
+      state = state || {};
+      history.pushState(state, null, fragment);
+      this.notify(state);
     },
-    replaceState: function(fragment) {
-      history.replaceState({}, null, fragment);
+    replaceState: function(fragment, state) {
+      state = state || {};
+      history.replaceState(state, null, fragment);
     },
-    notify: function() {
-      this.matcher(location.pathname + location.search);
+    notify: function(state) {
+      this.matcher(location.pathname + location.search, state);
     },
     start: function(matcher) {
       this.matcher = matcher;
-      window.addEventListener("popstate", function() {
+      window.addEventListener("popstate", function(event) {
         // workaround to always ignore first popstate event (Chrome)
         // a timeout isn't reliable enough
         if (initial && initial === location.href) {
           initial = null;
           return;
         }
-        SimpleHistory.notify();
+        SimpleHistory.notify(event.state || {});
       }, false);
     }
   };

@@ -32,6 +32,14 @@ To trigger a state change manually, use the `pushState` and `replaceState` metho
 As with the underlying API, `pushState` adds a history entry, `replaceState` replaces the
 current history entry. Use `replaceState` whenever you implement a redirect.
 
+Both also accept an second optional state argument (the first argument in the underlying implementation).
+
+    SimpleHistory.pushState(fragment, state);
+    SimpleHistory.replaceState(fragment, state);
+
+The title argument is not supported, as browsers don't implement that. Its trivial to implement where needed,
+just update document.title manually.
+
 ## Roadmap
 
 This library is intended to be kept as simple as it is now. It won't ever support a
